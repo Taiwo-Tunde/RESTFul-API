@@ -27,4 +27,10 @@ router.delete("/:id", (req, res) => {
     res.send("Deleting a single product");
 });
 
+
+router.get("3000/", (req, res) => {
+    res.send("Deleting a single product");
+});
+
+
 module.exports =router;
