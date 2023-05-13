@@ -3,7 +3,7 @@ const express = require("express");
 const app = express();
 const productRoute = require("./Routes/product.route")
 const mongoose = require("mongoose");
-const {product} = require("./ProductSchema/ProductSchema.js");
+app.use(express.json());
 
 
 
@@ -22,6 +22,7 @@ app.use((req, res)=>{
 res.status(404)
 res.send({error:"Product not found"})
 })
+
 
 
 

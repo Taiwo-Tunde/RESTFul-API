@@ -1,6 +1,7 @@
 
 const express = require('express');
 const router = express.Router();
+const product = require("../ProductSchema/ProductSchema.js");
 
 
 router.get("/", (req, res) => {
@@ -8,9 +9,25 @@ router.get("/", (req, res) => {
 });
 
 
-router.post("/", (req, res) => {
-    res.send("products created");
+
+router.post("/", (req, res, next) => {
+    const {name, price} = req.body
+    const products = new product({
+        name,
+        price
+    });
+
+    products.save()
+        .then((result) => {
+            res.send(result)
+            console.log(result);
+
+        })
+        .catch((err) => {
+            console.log(err);
+        });
 });
+
 
 
 router.get("/:id", (req, res) => {
