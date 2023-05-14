@@ -1,4 +1,7 @@
 
+
+
+//This folder contains all the route for the application
 const express = require('express');
 const router = express.Router();
 const product = require("../ProductSchema/ProductSchema.js");
