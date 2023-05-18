@@ -1,4 +1,7 @@
+
+### get the list of all products
 GET http://localhost:3000/products
+Content-Type: application/json
 
 
 
@@ -8,26 +11,29 @@ POST  http://localhost:3000/products
 Content-Type:application/json
 
 {
-    "name": "iphone 12",
-    "price": 1200
+    "name": "iphone 10 pro",
+    "price": 15000
 }
 
 
 ### get a product by ID
-GET http://localhost:3000/products/id
+GET http://localhost:3000/products/64667a11338bafbd66abc731
 
 
 ###  update a product by ID
 
-PATCH  http://localhost:3000/products/id
+PATCH  http://localhost:3000/products/646683d8c3ece511b5823bcd
+Content-Type: application/json
+{
+    "name":"update",
+    "price":2000000
+}
   
 
 ###    delete a product by ID
 
-DELETE  http://localhost:3000/products/id
+DELETE  http://localhost:3000/products/64667a11338bafbd66abc731
 
 
 
-###    
 
-GET  http://localhost:3000/

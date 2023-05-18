@@ -1,56 +1,79 @@
-
-
-
 //This folder contains all the route for the application
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 const product = require("../ProductSchema/ProductSchema.js");
 
+router.post("/", async (req, res, next) => {
+  try {
+    const products = new product(req.body);
+    const result = await products.save();
+    res.send(result);
+  } catch (error) {
+    console.error(error);
+  }
 
-router.get("/", (req, res) => {
-    res.send("getting a list of products");
+  // const {name, price} = req.body
+  // const products = new product({
+  //     name,
+  //     price
+  // });
+
+  // products.save()
+  //     .then((result) => {
+  //         res.send(result)
+  //         console.log(result);
+
+  //     })
+  //     .catch((err) => {
+  //         console.log(err);
+  //     });
 });
 
-
-
-router.post("/", (req, res, next) => {
-    const {name, price} = req.body
-    const products = new product({
-        name,
-        price
-    });
-
-    products.save()
-        .then((result) => {
-            res.send(result)
-            console.log(result);
-
-        })
-        .catch((err) => {
-            console.log(err);
-        });
+router.get("/", async (req, res) => {
+  try {
+    const listOfProducts = await product.find({}, { __v: 0 });
+    res.send(listOfProducts);
+  } catch (error) {
+    console.log(error);
+  }
 });
 
-
-
-router.get("/:id", (req, res) => {
-    res.send("getting a single product");
+router.get("/:id", async (req, res) => {
+  try {
+    const singleProduct = await product.findOne(
+      { id: req.body.id },
+      { __v: 0 }
+    );
+    res.send(singleProduct);
+    console.log(singleProduct);
+  } catch (error) {
+    console.log(error);
+  }
 });
 
-
-router.patch("/:id", (req, res) => {
-    res.send("Updating a single product");
+router.patch("/:id", async (req, res) => {
+  try {
+    const updatedProduct = await product.findByIdAndUpdate(
+      { id: req.body.id },
+      { __v: 0 }
+    );
+    res.send(updatedProduct);
+  } catch (error) {
+    console.log(error);
+  }
 });
 
-
-router.delete("/:id", (req, res) => {
-    res.send("Deleting a single product");
+router.delete("/:id", async (req, res) => {
+  try {
+    const deletedProduct = await product.deleteOne({ id: req.body.id });
+    res.send(deletedProduct);
+  } catch (error) {
+    console.log(error);
+  }
 });
-
 
 router.get("3000/", (req, res) => {
-    res.send("Deleting a single product");
+  res.send("Deleting a single product");
 });
 
-
-module.exports =router;
+module.exports = router;
