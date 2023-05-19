@@ -24,6 +24,7 @@ GET http://localhost:3000/products/64667a11338bafbd66abc731
 
 PATCH  http://localhost:3000/products/646683d8c3ece511b5823bcd
 Content-Type: application/json
+
 {
     "name":"update",
     "price":2000000

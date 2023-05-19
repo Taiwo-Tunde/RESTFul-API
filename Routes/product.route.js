@@ -49,7 +49,7 @@ router.get("/:id", async (req, res) => {
       { __v: 0 }
     );
     res.send(singleProduct);
-    console.log(singleProduct);
+
   } catch (error) {
     console.log(error);
   }
@@ -58,7 +58,7 @@ router.get("/:id", async (req, res) => {
 //function to update a single product
 router.patch("/:id", async (req, res) => {
   try {
-    const updatedProduct = await product.findByIdAndUpdate(
+    const updatedProduct = await product.updateOne(
       { id: req.body.id },
       { __v: 0 }
     );
