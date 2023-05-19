@@ -3,6 +3,8 @@ const express = require("express");
 const router = express.Router();
 const product = require("../ProductSchema/ProductSchema.js");
 
+
+// function to handle creation of new products
 router.post("/", async (req, res, next) => {
   try {
     const products = new product(req.body);
@@ -29,6 +31,7 @@ router.post("/", async (req, res, next) => {
   //     });
 });
 
+//function get list of products
 router.get("/", async (req, res) => {
   try {
     const listOfProducts = await product.find({}, { __v: 0 });
@@ -38,6 +41,7 @@ router.get("/", async (req, res) => {
   }
 });
 
+//fucntion to get single product
 router.get("/:id", async (req, res) => {
   try {
     const singleProduct = await product.findOne(
@@ -51,6 +55,7 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+//function to update a single product
 router.patch("/:id", async (req, res) => {
   try {
     const updatedProduct = await product.findByIdAndUpdate(
@@ -63,6 +68,7 @@ router.patch("/:id", async (req, res) => {
   }
 });
 
+// function to delete product
 router.delete("/:id", async (req, res) => {
   try {
     const deletedProduct = await product.deleteOne({ id: req.body.id });
@@ -72,8 +78,5 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
-router.get("3000/", (req, res) => {
-  res.send("Deleting a single product");
-});
 
 module.exports = router;
