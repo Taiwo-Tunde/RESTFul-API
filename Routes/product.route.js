@@ -43,9 +43,9 @@ router.get("/", async (req, res) => {
 
 //fucntion to get single product
 router.get("/:id", async (req, res) => {
+  const id = req.params.id;
   try {
-    const singleProduct = await product.findOne(
-      { id: req.body.id },
+    const singleProduct = await product.findById(id,
       { __v: 0 }
     );
     res.send(singleProduct);
@@ -58,10 +58,10 @@ router.get("/:id", async (req, res) => {
 //function to update a single product
 router.patch("/:id", async (req, res) => {
   try {
-    const updatedProduct = await product.updateOne(
-      { id: req.body.id },
-      { __v: 0 }
-    );
+    const id = req.params.id;
+    const body = req.body
+    const Option = {new : true}
+    const updatedProduct = await product.findByIdAndUpdate(id, body, Option);
     res.send(updatedProduct);
   } catch (error) {
     console.log(error);
@@ -70,12 +70,16 @@ router.patch("/:id", async (req, res) => {
 
 // function to delete product
 router.delete("/:id", async (req, res) => {
-  try {
-    const deletedProduct = await product.deleteOne({ id: req.body.id });
-    res.send(deletedProduct);
-  } catch (error) {
-    console.log(error);
-  }
+  const id = req.params.id;
+try {
+  
+  const deletedProduct = await product.findByIdAndDelete(id);
+  res.send(deletedProduct);
+  
+} catch (error) {
+  console.log(error);
+}
+
 });
 
 
