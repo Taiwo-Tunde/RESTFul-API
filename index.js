@@ -3,6 +3,7 @@ const express = require("express");
 const app = express();
 const productRoute = require("./Routes/product.route")
 const mongoose = require("mongoose");
+const createError = require("http-errors")
 app.use(express.json());
 
 
@@ -18,12 +19,16 @@ mongoose.connect("mongodb://localhost:27017/RESTFUL-API" ,{
 
 app.use("/products", productRoute)
 
-app.use((req, res)=>{
-res.status(404)
-res.send({error:"Product not found"})
+app.use((req, res, next)=>{
+const Err = new Error("Not Found")
+Err.status = 404
+next(Err)
 })
-
-
+ 
+//Error handler
+// app.use((Err, req, res, next) => {
+     
+// }
 
 
 
