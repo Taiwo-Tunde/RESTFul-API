@@ -68,7 +68,7 @@ router.patch("/:id", async (req, res) => {
   }
 });
 
-// function to delete product
+// function to delete product by id
 router.delete("/:id", async (req, res) => {
   const id = req.params.id;
 try {
